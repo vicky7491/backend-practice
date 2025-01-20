@@ -46,7 +46,32 @@ app.post('/register', async(req, res)=>{
     email: email,
     password: password,
    })
-    res.send('user register')
+    res.send(newUser)
+})
+
+// app.get('/get-users', (req, res)=>{
+//     userModel.find({username: 'Nitish5212'}).then((users)=>{
+//         res.send(users)
+//     })
+// })
+app.get('/get-users', (req, res)=>{
+    userModel.findOne({username: 'Nitish5212'}).then((users)=>{
+        res.send(users)
+    })
+})
+
+app.get('/update-user', async(req,res)=>{
+   await userModel.findOneAndUpdate({
+        username: 'Nitish5212'
+    },{
+        email: 'xyz@me.com'
+    })
+    res.send("user Updated")
+})
+
+app.get('/delete-user', async(req,res)=>{
+   await userModel.findOneAndDelete({username: 'Nitish5212'})
+   res.send('user deleted')
 })
 
 app.post('/get-form-data', (req,res)=>{
